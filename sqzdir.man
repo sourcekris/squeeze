@@ -1,0 +1,113 @@
+.TH sqz 1
+.SH NAME
+sqzdir \- apply
+.I squeeze
+to a directory hierarchy
+.PP
+unsqzdir \- apply
+.I unsqueeze
+to a directory hierarchy
+.SH SYNTAX
+sqzdir
+[ options and directories ]
+.PP
+unsqzdir
+[ options and directories ]
+.SH DESCRIPTION
+.I sqzdir
+uses
+.I find
+and
+.I filterfile
+to apply
+.I squeeze
+to one or more directories,
+passing down through the entire tree beneath each directory.
+It passes all options through to
+.I squeeze.
+.I unsqzdir
+bears the same relation to
+.I unsqeeze.
+.PP
+Each original file is removed;
+the
+\fIsqueeze\fBd
+data is placed into a file having the same name
+with a suffix of
+\fIMW\fB.
+.I sqzdir
+strips this suffix from its input file names.
+.PP
+File protections and access/modification times are preserved.
+.PP
+.I unsqzdir
+simply reverses the operations of
+.I sqzdir.
+.PP
+If you do not specify a filename,
+.I sqzdir
+and
+.I unsqzdir
+assume the current directory.
+.PP
+Read the
+.I squeeze
+and
+.I unsqueeze
+documentation for a description of options and
+of the compression method.
+.SH DIAGNOSTICS
+.PP
+.I squeeze
+and
+.I unsqueeze
+will print compression statistics if you specify
+.B\-v.
+.PP
+.I filterfile
+may produce error messages if
+a file does not exist or has more than one link,
+or if you move the file during
+the operation.
+.SH MACHINES
+.I sqzdir
+and
+.I unsqzdir
+have been tested on an Astronautics ZS-2
+running ZSUnix,
+a Convex C1 running Convex UNIX,
+and an HP9000 running HP-UX.
+.SH FILES
+None.
+.SH BUGS
+None known.
+.SH RESTRICTIONS
+.I sqzdir
+and
+.I unsqzdir
+are truly obnoxious in insisting upon a single MW suffix
+for
+\fIsqueeze\fBd
+files.
+.PP
+.I sqzdir
+and
+.I unsqzdir
+do not provide for overwriting an existing file.
+.PP
+Because
+these programs are not integrated,
+the error messages may seem a bit strange at times.
+.SH VERSION
+sqzdir, dated September 27, 1989.
+.PP
+unsqzdir, dated September 27, 1989.
+.SH AUTHOR
+Copyright 1989, Daniel J. Bernstein.
+.SH "SEE ALSO"
+squeeze(1),
+unsqueeze(1),
+sqz(1),
+mwcat(1),
+filterfile(1),
+find(1)

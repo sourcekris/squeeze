@@ -1,0 +1,10 @@
+Version 1.711, 10/28/89. (Can't wait for 1.7111, 1.71111111, ... :-) )
+
+Put in new copyright notice and warranty.
+
+Version 1.71, 9/27/89.
+
+squeeze and unsqueeze now complain about being given a filename.
+Added sqz, sqzdir, unsqz, unsqzdir, mwcat.
+
+Version 1.7.

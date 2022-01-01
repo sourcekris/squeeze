@@ -1,0 +1,23 @@
+#!/bin/sh
+OPTIONS=
+FILES=
+FILTERFILEEXT=.MW; export FILTERFILEEXT
+for ARG
+do
+  case "$ARG" in
+    -*) OPTIONS="$OPTIONS $ARG";;
+    *) ARG="`expr $ARG : '\(.*\.MW\)' '|' $ARG.MW`"
+       FILES="$FILES $ARG";;
+  esac
+done
+if test -z "$FILES"
+then
+  echo 'unsqz: fatal: must specify filenames; use unsqueeze for a filter' 1>&2
+  exit 1
+fi
+set $FILES
+for ARG
+do
+  filterfile -dpt "$ARG" unsqueeze $OPTIONS
+done
+exit 0

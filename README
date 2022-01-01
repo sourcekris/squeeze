@@ -1,0 +1,36 @@
+squeeze, unsqueeze - compress data with Miller-Wegman encoding
+
+squeeze version 1.711, October 28, 1989.
+Copyright (c) 1989, Daniel J. Bernstein.
+All rights reserved.
+
+This distribution packaged October 28, 1989.
+
+Files:
+CHANGES         Description of changes since first distributed version
+README          This document
+Makefile        Installation commands
+squeeze.c       The squeeze program
+unsqueeze.c     The unsqueeze program
+sqz             A shell script to apply squeeze to files
+sqzdir          A shell script to apply squeeze to a directory hierarchy
+unsqz           A shell script to apply unsqueeze to files
+unsqzdir        A shell script to apply unsqueeze to a directory unhierary
+mwcat           A shell script to apply cat to squeezed files
+squeeze.man     Documentation for squeeze
+unsqueeze.man   Documentation for unsqueeze
+sqz.man         Documentation for sqz, unsqz
+sqzdir.man      Documentation for sqzdir, unsqzdir
+mwcat.man       Documentation for mwcat
+
+Edit the options in Makefile and type make. squeeze and unsqueeze
+will be the executable programs; the nroff'ed man files will go into
+squeeze.1, unsqueeze.1, etc. squeeze and unsqueeze are filters only; 
+sqz, sqzdir, unsqz, unsqzdir, and mwcat apply them to files.
+Note that the shell scripts need filterfile version 1.2 or later.
+
+I don't pretend to know your machine's setup so there's no make install.
+
+Read CHANGES for a list of changes. Type squeeze -C and squeeze -W
+for copyright and warranty information, squeeze -H for help; similarly
+for unsqueeze.

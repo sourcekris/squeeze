@@ -1,0 +1,206 @@
+.TH squeeze 1
+.SH NAME
+squeeze \- compress data with Miller\-Wegman encoding
+.SH SYNTAX
+squeeze
+[
+\fB\-eErRbBv\fI
+] [
+\fB\-ACHUVW\fI
+]
+.SH DESCRIPTION
+.I squeeze
+compresses its standard input
+and writes the result to its standard output.
+\fIsqueeze\fBd
+files can be restored
+with
+\fIunsqueeze\fB.
+.PP
+Options
+.B ACHUVW
+print the authorship notice,
+copyright notice,
+help notice,
+short usage summary,
+version number,
+and warranty information respectively.
+.PP
+.I squeeze
+has several flags:
+.TP 12
+.B -e
+Leave an explicit end-of-file marker in the output.
+If you use this flag, you can add any
+sort of random garbage onto the end of the compressed data
+without affecting the decompressed form.
+.TP
+.B -E
+Do not leave an end-of-file marker. This is the default.
+.TP
+.B -r
+Produce ``randomized'' output.
+.I squeeze
+will use the time of day to introduce
+random bits of information
+into the output.
+Normally, for efficiency and so that
+.I squeeze
+can produce output before seeing the end of the input,
+there must be slight output redundancy.
+Under
+.B -r,
+this redundancy disappears
+and almost all
+\fIsqueeze\fBd
+texts are possible.
+Since
+.I squeeze
+does not output a recognizable header,
+and since Miller-Wegman encoding is so good at removing
+redundancy,
+.I squeeze -r
+is a very useful step before encryption.
+(Caveat: the beginning of the output depends only
+on the beginning of the input, so you should make sure
+to
+.I precede the uncompressed input
+.I by unpredictable data
+before feeding it to
+.I squeeze.)
+.TP
+.B -R
+Do not randomize output. This is the default.
+.TP
+.B -b
+.I squeeze
+maintains a
+``dictionary''
+of strings
+adapted to the data seen so far.
+When
+.I squeeze
+runs out of memory,
+it will adapt to the next
+``block'' of the file
+by throwing out the dictionary and starting over.
+This is the default behavior and is given explicitly as
+.B -b.
+.TP
+.B -B
+Given this flag,
+.I squeeze
+will simply freeze its old dictionary
+when it runs out of memory,
+rather than hope to do better on the
+succeeding data.
+This will produce better (and faster) results
+if the first ``block'' of the file
+has similar characteristics to the rest of the file.
+.TP
+.B -v
+.I squeeze
+will be ``verbose'' and report compression statistics
+to standard error.
+.PP
+.I squeeze
+uses Miller-Wegman encoding,
+a variant on Ziv-Lempel encoding.
+The amount of compression obtained depends on the size of the
+input, the amount of memory
+.I squeeze
+uses,
+and the distribution of common substrings.
+Typically, text such as source code or English
+is reduced by 70\-80%.
+.PP
+It is natural to compare
+.I squeeze
+to
+.I compress,
+which uses straightforward Ziv-Lempel encoding.
+In the author's experience,
+Miller-Wegman encoding produces output
+10\-40%
+smaller than the corresponding Ziv-Lempel output;
+and the best case is much better.
+On the other hand,
+Miller-Wegman encoding fares slightly worse
+on patternless data,
+and since it requires general string matching
+while Ziv-Lempel requires only a restricted type
+of string matching,
+.I squeeze
+has been somewhat slower than
+.I compress
+in the author's tests.
+.PP
+For files longer than a megabyte,
+.I squeeze
+often produces output under one third the size of the output from
+.I compress,
+but may do twice as much computation.
+It should also be noted that
+.I squeeze
+is much more of a memory hog than
+.I compress,
+since it uses a more complex algorithm.
+.PP
+The choices between
+.B -e
+and
+.B -E,
+and between
+.B -b
+and
+.B -B,
+change the structure of the compressed file.
+Be careful to select the same flags for
+.I unsqueeze.
+.SH DIAGNOSTICS
+.TP
+\fIIn:\fB xxx \fIchars  Out:\fB xxx \fIchars  Squeezed to:\fB xx%
+The utilizer of the computational machinery
+has specified the ``verbose'' option
+to
+.I squeeze
+via the
+establishment of the character v
+within an argument
+preceded by a hyphen.
+.TP
+\fII am a filter, try sqz for squeezing files\fB
+Self-explanatory.
+.SH MACHINES
+.I squeeze
+has been tested on an Astronautics ZS-2
+running ZSUnix,
+a Convex C1 running Convex UNIX,
+and an HP9000 running HP-UX.
+.SH FILES
+None.
+.SH BUGS
+None known.
+.SH RESTRICTIONS
+.I squeeze
+does not adapt to the amount of memory available;
+its memory use is set at compile time.
+.PP
+.I squeeze
+does not provide a more advanced blocking method.
+.SH VERSION
+squeeze version 1.711, dated October 28, 1989.
+.SH AUTHOR
+Copyright 1989, Daniel J. Bernstein.
+.SH REFERENCES
+Victor S. Miller,
+"Data Compression Algorithms"
+in Proceedings of Symposia in Applied Mathematics
+Volume 34, 1986.
+A readable summary of major coding methods.
+.SH "SEE ALSO"
+unsqueeze(1),
+sqz(1),
+sqzdir(1),
+mwcat(1),
+compress(1)

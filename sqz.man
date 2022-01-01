@@ -1,0 +1,106 @@
+.TH sqz 1
+.SH NAME
+sqz \- apply
+.I squeeze
+to a file
+.PP
+unsqz \- apply
+.I unsqueeze
+to a file
+.SH SYNTAX
+sqz
+[ options and files ]
+.PP
+unsqz
+[ options and files ]
+.SH DESCRIPTION
+.I sqz
+uses
+.I filterfile
+to apply
+.I squeeze
+to one or more files.
+It passes all options through to
+.I squeeze.
+.I unsqz
+bears the same relation to
+.I unsqeeze.
+.PP
+Each original file is removed;
+the
+\fIsqueeze\fBd
+data is placed into a file having the same name
+with a suffix of
+\fIMW\fB.
+.I sqz
+strips this suffix from its input file names.
+.PP
+File protections and access/modification times are preserved.
+.PP
+.I unsqz
+simply reverses the operations of
+.I sqz.
+.PP
+Read the
+.I squeeze
+and
+.I unsqueeze
+documentation for a description of options and
+of the compression method.
+.SH DIAGNOSTICS
+.TP
+\fIfatal: must specify filenames; use squeeze for a filter\fB
+Self-explanatory.
+.PP
+.I squeeze
+and
+.I unsqueeze
+will print compression statistics if you specify
+.B\-v.
+.PP
+.I filterfile
+may produce error messages if
+a file does not exist or has more than one link,
+or if you move the file during
+the operation.
+.SH MACHINES
+.I sqz
+and 
+.I unsqz
+have been tested on an Astronautics ZS-2
+running ZSUnix,
+a Convex C1 running Convex UNIX,
+and an HP9000 running HP-UX.
+.SH FILES
+None.
+.SH BUGS
+None known.
+.SH RESTRICTIONS
+.I sqz
+and
+.I unsqz
+are truly obnoxious in insisting upon a single MW suffix
+for
+\fIsqueeze\fBd
+files.
+.PP
+.I sqz
+and
+.I unsqz
+do not provide for overwriting an existing file.
+.PP
+Because
+these programs are not integrated,
+the error messages may seem a bit strange at times.
+.SH VERSION
+sqz, dated September 27, 1989.
+.PP
+unsqz, dated September 27, 1989.
+.SH AUTHOR
+Copyright 1989, Daniel J. Bernstein.
+.SH "SEE ALSO"
+squeeze(1),
+unsqueeze(1),
+sqzdir(1),
+mwcat(1),
+filterfile(1)

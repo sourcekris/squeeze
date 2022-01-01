@@ -1,0 +1,176 @@
+.TH unsqueeze 1
+.SH NAME
+unsqueeze \- decompress data squeezed with Miller\-Wegman encoding
+.SH SYNTAX
+unsqueeze
+[
+\fB\-eErRbBv\fI
+] [
+\fB\-d\fIstring
+] [
+\fB\-ACHUVW\fI
+]
+.SH DESCRIPTION
+.I unsqueeze
+decompresses its standard input
+and writes the result to its standard output.
+The input should be a file compressed with
+.I squeeze.
+.PP
+Options
+.B ACHUVW
+print the authorship notice,
+copyright notice,
+help notice,
+short usage summary,
+version number,
+and warranty information respectively.
+.PP
+.I unsqueeze
+has several flags:
+.TP 12
+.B -e
+Expect an explicit end-of-file marker in the output.
+.TP
+.B -E
+Do not expect an explicit end-of-file marker. This is the default.
+.TP
+.B -r
+Accept any input string, including
+``randomized'' output from
+.I squeeze.
+This is the default.
+.TP
+.B -R
+Complain about randomized inputs.
+This will catch most inputs that come from
+\fIsqueeze\fB -r;
+it will also tend to catch inputs that don't come
+from
+.I squeeze
+at all.
+.TP
+.B -b
+Expect ``blocked'' input and accept ``next block'' codes.
+This is the default.
+.TP
+.B -B
+Expect unblocked input.
+.TP
+\fB-d\fIstring
+Insert
+.I string
+between output bunches.
+If you want to get a feel for the workings
+of Miller-Wegman compression, try this.
+.TP
+.B -v
+.I unsqueeze
+will be ``verbose'' and report compression statistics
+to standard error.
+.PP
+See
+.I squeeze(1)
+for a discussion of the time-space tradeoff
+involved in using Miller-Wegman encoding rather than
+Ziv-Lempel encoding.
+Note that
+.I unsqueeze
+runs nearly as quickly as
+.I uncompress,
+for the same size decompressed text,
+and can run faster for huge texts.
+.PP
+The choices between
+.B -e
+and
+.B -E,
+and between
+.B -b
+and
+.B -B,
+change the structure of the compressed file.
+Be careful to select the same flags as
+.I squeeze
+was given.
+.SH DIAGNOSTICS
+.TP 1.5i
+.I bad (randomized) input
+You gave the flag
+.B -R
+and the input cannot have come from
+.I squeeze
+with the same flags.
+.TP
+.I out of memory
+The file was
+\fIsqueeze\fBd
+in much more memory than
+.I unsqueeze
+has available.
+.TP
+.I EOF not signalled?
+You gave the flag
+.B -e
+but the input did not signal end-of-file.
+.TP
+\fIIn:\fB xxx \fIchars  Out:\fB xxx \fIchars  Squeezed to:\fB xx%
+The utilizer of the computational machinery
+has specified the ``verbose'' option
+to
+.I unsqueeze
+via the
+establishment of the character v
+within an argument
+preceded by a hyphen.
+.TP
+\fII am a filter, try unsqz for unsqueezing files\fB
+Self-explanatory.
+.SH MACHINES
+.I unsqueeze
+has been tested on an Astronautics ZS-2
+running ZSUnix,
+a Convex C-1 running Convex UNIX,
+and an HP9000 running HP-UX.
+.SH FILES
+None.
+.SH BUGS
+None known.
+.SH RESTRICTIONS
+.I unsqueeze
+does not adapt to the amount of memory available;
+its memory use is set at compile time.
+.PP
+Unlike
+.I uncompress,
+.I unsqueeze
+carefully checks bounds on its variables
+and cannot be made to loop.
+(\fIuncompress\fB
+depends upon receiving signal SEGV when it uses out-of-bounds
+variables.)
+For efficiency,
+.I unsqueeze
+makes one exception
+that could, conceivably, cause a segmentation fault.
+This exception can only happen for certain
+specially constructed files of length at least
+half a billion bytes.
+Of course, that doesn't excuse the author,
+who begs forgiveness for this lapse of judgment.
+.SH VERSION
+unsqueeze version 1.711, dated October 28, 1989.
+.SH AUTHOR
+Copyright 1989, Daniel J. Bernstein.
+.SH REFERENCES
+Victor S. Miller,
+"Data Compression Algorithms"
+in Proceedings of Symposia in Applied Mathematics
+Volume 34, 1986.
+A readable summary of major coding methods.
+.SH "SEE ALSO"
+squeeze(1),
+sqz(1),
+sqzdir(1),
+mwcat(1),
+compress(1)

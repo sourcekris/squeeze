@@ -1,0 +1,19 @@
+#!/bin/sh
+OPTIONS=
+FILES=
+FILTERFILEEXT=MW; export FILTERFILEEXT
+for ARG
+do
+  case "$ARG" in
+    -*) OPTIONS="$OPTIONS $ARG";;
+    *) FILES="$FILES $ARG";;
+  esac
+done
+if test -z "$FILES"
+then
+  FILES=.
+fi
+set $FILES
+find $@ -type f -links 1 \! \( -name '*.MW' -o -name '.*.MW' \) -exec filterfile -dpt {} squeeze $OPTIONS \;
+# stupid find, thinks * doesn't match dot files
+exit 0

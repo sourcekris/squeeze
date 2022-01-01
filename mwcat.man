@@ -1,0 +1,68 @@
+.TH mwcat 1
+.SH NAME
+mwcat \- print the contents of
+\fIsqueeze\fBd
+files
+.SH SYNTAX
+mwcat
+[ options and files ]
+.SH DESCRIPTION
+.I mwcat
+applies
+.I unsqueeze
+to one or more files,
+printing the result.
+It passes all options through to
+.I unsqueeze.
+.PP
+Read the
+.I squeeze
+and
+.I unsqueeze
+documentation for a description of options and
+of the compression method.
+.SH EXAMPLES
+To view foo.MW:
+.PP
+.EX
+mwcat foo | more
+.EE
+.PP
+For a display revealing common substrings (try it):
+.PP
+.EX
+mwcat -d~ foo | more
+.EE
+.SH DIAGNOSTICS
+.TP
+\fIfatal: must specify filenames; use unsqueeze for a filter\fB
+Self-explanatory.
+.PP
+.I unsqueeze
+will print compression statistics if you specify
+.B\-v.
+.SH MACHINES
+.I mwcat
+has been tested on an Astronautics ZS-2
+running ZSUnix,
+a Convex C1 running Convex UNIX,
+and an HP9000 running HP-UX.
+.SH FILES
+None.
+.SH BUGS
+None known.
+.SH RESTRICTIONS
+.I mwcat
+is truly obnoxious in insisting upon a single MW suffix
+for
+\fIsqueeze\fBd
+files.
+.SH VERSION
+mwcat, dated September 27, 1989.
+.SH AUTHOR
+Copyright 1989, Daniel J. Bernstein.
+.SH "SEE ALSO"
+squeeze(1),
+unsqueeze(1),
+sqz(1),
+sqzdir(1)
